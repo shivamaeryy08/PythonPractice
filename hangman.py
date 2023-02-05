@@ -53,3 +53,4 @@ if winner:
     print("You won!")
 else:
     print("You lost")
+    print("The word was", word)
