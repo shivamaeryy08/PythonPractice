@@ -1,4 +1,4 @@
-from caesarart import logo
+from caesar.caesarart import logo
 
 print(logo)
 

@@ -1,6 +1,6 @@
 import random
-import hangmanart
-from hangmanwords import word_list
+import hangman.hangmanart as hangmanart
+from hangman.hangmanwords import word_list
 
 
 stages = hangmanart.stages

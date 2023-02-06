@@ -1,6 +1,6 @@
 #how to import module
 import random
-import lovescore
+import exercises.lovescore as lovescore
 
 random_integer = random.randint(100,200)
 print(lovescore.first_name) #how to use another module
