@@ -29,3 +29,27 @@ dict["name"] = "Joker"
 
 for keys in dict:
     print(keys)
+
+# Nesting
+
+capitals = {
+    "FRANCE": "PARIS",
+    "Germany": "Berlin",
+}
+
+# Nesting a list in a dictionary
+
+travel_log = {"France": ["Paris", "Lillie", "Dijon"]}
+
+# Nesting dict in dict
+
+travel_log_city = {
+    "France": {"Visited": ["Paris", "Lillie", "Dijon"], "total_#_visits": 12}
+}
+
+print(travel_log_city["France"]["total_#_visits"])
+
+# Can Nesting dict in list
+
+dict1 = {}
+dict2 = {}
