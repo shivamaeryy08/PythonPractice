@@ -8,10 +8,10 @@ bidders = {}
 bids = []
 while other_bidders == "yes":
     name = input("What is your name?: ")
-    bid = int(input("What's your bid: "))
+    bid = int(input("What's your bid: $"))
     bidders[name] = {"bid": bid}
     bids.append(bid)
-    other_bidders = input("Type yes or no.").lower()
+    other_bidders = input("Are there any other bidders? Type yes or no: ").lower()
     os.system("cls")
 
 max_bid = max(bids)
