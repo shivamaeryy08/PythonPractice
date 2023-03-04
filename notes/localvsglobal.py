@@ -12,6 +12,7 @@ enemies = 1
 def increase_enemies():
     global enemies
     enemies += 2
+
     print(enemies)
 
 increase_enemies()

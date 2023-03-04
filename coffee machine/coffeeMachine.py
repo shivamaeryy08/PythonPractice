@@ -55,7 +55,7 @@ def get_drink(type_drink,coins):
         return print(f"Sorry that's not enough money. The price is {money_req}")
     resources['water'] -= water_req
     if (type_drink!='espresso'):
-        resources["milk"] -=  milk_req
+        resources["milk"] -= milk_req
     resources["coffee"] -= coffee_req
     if (coins > money_req):
         change = math.ceil((coins - money_req)*100)/100
