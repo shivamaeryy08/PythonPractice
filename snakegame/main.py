@@ -24,27 +24,22 @@ screen.update()
 score = Score(WINDOW_HEIGHT=WINDOW_HEIGHT)
 screen.update()
 distance_boundary = 20
-
-
-def start_snake_game():
-    while play_game:
-        out_bounds = snake.head.xcor() > WINDOW_WIDTH / 2 - distance_boundary or snake.head.xcor() < (
-                -1 * (
-                WINDOW_WIDTH / 2 - distance_boundary)) or snake.head.ycor() > WINDOW_HEIGHT / 2 - distance_boundary or snake.head.ycor() < (
-                             -1 * (WINDOW_HEIGHT / 2 - distance_boundary))
-        if snake.detect_collision() or out_bounds:
-            play_game = False
-            score.display_loss()
+while play_game:
+    out_bounds = snake.head.xcor() > WINDOW_WIDTH / 2 - distance_boundary or snake.head.xcor() < (
+            -1 * (
+            WINDOW_WIDTH / 2 - distance_boundary)) or snake.head.ycor() > WINDOW_HEIGHT / 2 - distance_boundary or snake.head.ycor() < (
+                         -1 * (WINDOW_HEIGHT / 2 - distance_boundary))
+    if snake.detect_collision() or out_bounds:
+        play_game = False
+        score.display_loss()
+        screen.update()
+    else:
+        time.sleep(0.03)
+        snake.move()
+        screen.update()
+        if food.distance(snake.head) < 17:
+            food.move_food()
+            snake.add_head()
+            score.update_score()
             screen.update()
-        else:
-            time.sleep(0.03)
-            snake.move()
-            screen.update()
-            if food.distance(snake.head) < 17:
-                food.move_food()
-                snake.add_head()
-                score.update_score()
-                screen.update()
-
-
 screen.exitonclick()
