@@ -31,8 +31,11 @@ screen.onkey(fun=left_handle.go_down, key='s')
 while game_is_on:
     right_handle.move_up_and_down(window_height=WINDOW_HEIGHT)
     left_handle.move()
+    if ball.xcor() > WINDOW_WIDTH / 2 - 100:
+        ball.move_ball_start()
+        screen.update()
     ball.move(window_height=WINDOW_HEIGHT)
     screen.update()
-    time.sleep(0.10)
+    time.sleep(0.05)
 
 screen.exitonclick()
