@@ -33,6 +33,11 @@ while game_is_on:
     left_handle.move()
     if ball.xcor() > WINDOW_WIDTH / 2 - 100:
         ball.move_ball_start()
+        score_left.update_score()
+        screen.update()
+    if ball.xcor() < -1 * (WINDOW_WIDTH / 2) - 100:
+        ball.move_ball_start()
+        score_right.update_score()
         screen.update()
     ball.move(window_height=WINDOW_HEIGHT)
     screen.update()
