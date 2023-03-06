@@ -10,25 +10,12 @@ LEFT = 180
 RIGHT = 0
 
 
-# TODO make distance bet squares cusotmizatbale
-# TODO fix snake measurement w.r to hitting circle
-# TODO fix snake speed
-
 class Snake:
 
     def __init__(self):
         self.segment_list = [segment]
         self.head = segment
         self.tail = segment
-        for i in range(3):
-            self.add_head()
-            self.add_head()
-            self.add_head()
-            self.add_head()
-            self.add_head()
-            self.add_head()
-            self.add_head()
-            self.add_head()
 
     def move(self):
         for i in range(len(self.segment_list) - 1, 0, -1):
@@ -38,11 +25,11 @@ class Snake:
         self.head.forward(DISTANCE)
 
     def turn_right(self):
-        if (self.head.heading() != LEFT):
+        if self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
 
     def turn_left(self):
-        if (self.head.heading() != RIGHT):
+        if self.head.heading() != RIGHT:
             self.head.setheading(LEFT)
 
     def turn_down(self):
@@ -70,14 +57,13 @@ class Snake:
         self.segment_list.insert(0, new_head)
         self.head = new_head
 
-    def detect_collision(self, WINDOW_WIDTH, WINDOW_HEIGHT, distance_boundary):
-        out_bounds = self.head.xcor() > WINDOW_WIDTH / 2 - distance_boundary or self.head.xcor() < (
+    def detect_collision(self, window_width, window_height, distance_boundary):
+        out_bounds = self.head.xcor() > window_width / 2 - distance_boundary or self.head.xcor() < (
                 -1 * (
-                WINDOW_WIDTH / 2 - distance_boundary)) or self.head.ycor() > WINDOW_HEIGHT / 2 - distance_boundary or self.head.ycor() < (
-                             -1 * (WINDOW_HEIGHT / 2 - distance_boundary))
+                window_width / 2 - distance_boundary)) or self.head.ycor() > window_height / 2 - distance_boundary or self.head.ycor() < (
+                             -1 * (window_height / 2 - distance_boundary))
         collided_tail = False
-        for snake_segment in self.segment_list:
-            if snake_segment != self.head:
-                if self.head.distance(snake_segment) == 0.0:
-                    collided_tail = True
+        for snake_segment in self.segment_list[1:]:
+            if self.head.distance(snake_segment) < 5:
+                collided_tail = True
         return collided_tail or out_bounds

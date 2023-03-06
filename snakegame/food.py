@@ -8,12 +8,12 @@ COLOR = 'blue'
 # TODO check if dot needed to be shaped
 
 class Food(Turtle):
-    def __init__(self, WINDOW_WIDTH, WINDOW_HEIGHT):
+    def __init__(self, window_width, window_height):
         super().__init__()
         self.size = SIZE
         self.color = COLOR
-        self.window_width = WINDOW_WIDTH / 2 - 30
-        self.window_height = WINDOW_HEIGHT / 2 - 30
+        self.window_width = window_width / 2 - 30
+        self.window_height = window_height / 2 - 30
         random_x = random.randint(-self.window_width, self.window_width)
         random_y = random.randint(-self.window_height, self.window_height)
         self.shape('circle')

@@ -5,12 +5,12 @@ FONT = ('Arial', 20, 'normal')
 
 
 class Score(Turtle):
-    def __init__(self, WINDOW_HEIGHT):
+    def __init__(self, window_height):
         super().__init__()
         self.score = 0
         self.penup()
         self.color('white')
-        self.setposition(0, WINDOW_HEIGHT / 2 - 30)
+        self.setposition(0, window_height / 2 - 30)
         self.write(arg=f'Score: {self.score}', align=ALIGNMENT, font=FONT)
         self.hideturtle()
 
