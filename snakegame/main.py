@@ -15,26 +15,23 @@ screen.tracer(0, 0)
 screen.listen()
 snake = Snake()
 screen.update()
-screen.onkey(key="w", fun=snake.turn_up)
-screen.onkey(key="s", fun=snake.turn_down)
-screen.onkey(key="a", fun=snake.turn_left)
-screen.onkey(key="d", fun=snake.turn_right)
+screen.onkey(key="Up", fun=snake.turn_up)
+screen.onkey(key="Down", fun=snake.turn_down)
+screen.onkey(key="Left", fun=snake.turn_left)
+screen.onkey(key="Right", fun=snake.turn_right)
 food = Food(WINDOW_WIDTH=WINDOW_WIDTH, WINDOW_HEIGHT=WINDOW_HEIGHT)
 screen.update()
 score = Score(WINDOW_HEIGHT=WINDOW_HEIGHT)
 screen.update()
 distance_boundary = 20
 while play_game:
-    out_bounds = snake.head.xcor() > WINDOW_WIDTH / 2 - distance_boundary or snake.head.xcor() < (
-            -1 * (
-            WINDOW_WIDTH / 2 - distance_boundary)) or snake.head.ycor() > WINDOW_HEIGHT / 2 - distance_boundary or snake.head.ycor() < (
-                         -1 * (WINDOW_HEIGHT / 2 - distance_boundary))
-    if snake.detect_collision() or out_bounds:
+    if snake.detect_collision(WINDOW_WIDTH=WINDOW_WIDTH, WINDOW_HEIGHT=WINDOW_HEIGHT,
+                              distance_boundary=distance_boundary):
         play_game = False
         score.display_loss()
         screen.update()
     else:
-        time.sleep(0.03)
+        time.sleep(0.02)
         snake.move()
         screen.update()
         if food.distance(snake.head) < 17:
