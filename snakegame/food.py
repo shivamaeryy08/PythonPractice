@@ -12,8 +12,8 @@ class Food(Turtle):
         super().__init__()
         self.size = SIZE
         self.color = COLOR
-        self.window_width = WINDOW_WIDTH - 20
-        self.window_height = WINDOW_HEIGHT - 20
+        self.window_width = WINDOW_WIDTH / 2 - 20
+        self.window_height = WINDOW_HEIGHT / 2 - 20
         random_x = random.randint(-self.window_width, self.window_width)
         random_y = random.randint(-self.window_height, self.window_height)
         self.shape('circle')
