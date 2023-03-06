@@ -21,12 +21,14 @@ screen.onkey(key="a", fun=snake.turn_left)
 screen.onkey(key="d", fun=snake.turn_right)
 food = Food(WINDOW_WIDTH=WINDOW_WIDTH, WINDOW_HEIGHT=WINDOW_HEIGHT)
 screen.update()
-score = Score(WINDOW_HEIGHT=WINDOW_HEIGHT / 2)
+score = Score(WINDOW_HEIGHT=WINDOW_HEIGHT)
 screen.update()
 
 while play_game:
     if snake.detect_collision():
         play_game = False
+        score.display_loss()
+        screen.update()
     else:
         time.sleep(0.03)
         snake.move()
@@ -34,5 +36,6 @@ while play_game:
         if food.distance(snake.head) < 17:
             food.move_food()
             snake.add_head()
+            score.update_score()
             screen.update()
 screen.exitonclick()
