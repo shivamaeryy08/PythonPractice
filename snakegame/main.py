@@ -31,7 +31,7 @@ while play_game:
         score.display_loss()
         screen.update()
     else:
-        time.sleep(0.02)
+        time.sleep(0.03)
         snake.move()
         screen.update()
         if food.distance(snake.head) < 17:

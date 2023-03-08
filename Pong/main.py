@@ -33,7 +33,6 @@ screen.onkey(fun=left_handle.go_down, key='Down')
 
 
 def update_score():
-    global game_is_on
     if ball.xcor() > WINDOW_WIDTH / 2:
         ball.move_ball_start()
         screen.update()
@@ -44,8 +43,6 @@ def update_score():
         screen.update()
         score_right.update_score()
         screen.update()
-    if score_right.score == 5:
-        game_is_on = False
 
 
 def handle_collision_ball():
@@ -67,6 +64,7 @@ while game_is_on:
     left_handle.move(window_height=WINDOW_HEIGHT)
     screen.update()
     update_score()
+    screen.update()
     handle_collision_ball()
     ball.move(window_height=WINDOW_HEIGHT)
     screen.update()

@@ -33,7 +33,7 @@ class Handle:
         self.head.setheading(UP)
 
     def generate_handle(self):
-        for i in range(10):
+        for i in range(15):
             prev_head = self.head
             new_head = Turtle('square')
             new_head.color('white')
