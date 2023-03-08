@@ -25,12 +25,14 @@ right_handle = Handle('right')
 right_handle.set_location(window_width=WINDOW_WIDTH)
 ball = Ball()
 game_is_on = True
-screen.onkey(fun=left_handle.go_up, key='w')
-screen.onkey(fun=left_handle.go_down, key='s')
+screen.onkey(fun=left_handle.go_up, key='Up')
+screen.onkey(fun=left_handle.go_down, key='Down')
 
 while game_is_on:
     right_handle.move_up_and_down(window_height=WINDOW_HEIGHT)
+    screen.update()
     left_handle.move(window_height=WINDOW_HEIGHT)
+    screen.update()
     if ball.xcor() > WINDOW_WIDTH / 2:
         ball.move_ball_start()
         score_left.update_score()
@@ -39,13 +41,28 @@ while game_is_on:
         ball.move_ball_start()
         score_right.update_score()
         screen.update()
-    # if ball.distance(left_handle.head) < 5:
-    #     ball.dy *= -1
-    #     ball.generate_direction(window_height=WINDOW_HEIGHT)
-    #     ball.move()
-    # else:
+    if ball.xcor() < 0:
+        for segment in left_handle.segment_list:
+            if ball.distance(segment) < 30:
+                ball.dx *= -1
+                break
+    if ball.xcor() > 0:
+        for segment in right_handle.segment_list:
+            if ball.distance(segment) < 30:
+                ball.dx *= -1
+                break
     ball.move(window_height=WINDOW_HEIGHT)
+    # if ball.distance(left_handle.head) < 30:
+    #     ball.dy *= -1
+    #     ball.move(window_height=WINDOW_HEIGHT)
+    # else:
+    #     ball.move(window_height=WINDOW_HEIGHT)
+    # # if ball.distance(right_handle.head) < 5:
+    # #     ball.dy *= -1
+    # #     ball.move(window_height=WINDOW_HEIGHT)
+    # # else:
+    # #     ball.move(window_height=WINDOW_HEIGHT)
     screen.update()
-    time.sleep(0.05)
+    time.sleep(0.02)
 
 screen.exitonclick()

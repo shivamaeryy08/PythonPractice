@@ -10,8 +10,8 @@ def generate_random_angle():
             continue
         y = r.uniform(-1 * (math.sqrt(3) / 2), (math.sqrt(3) / 2))
         angle = math.degrees(math.atan2(y, x))
-        invalid_pos_angle = 80 <= angle <= 100 or 250 <= angle <= 290
-        invalid_neg_angle = -80 <= angle <= -100 or -250 <= angle <= -290
+        invalid_pos_angle = 80 <= angle <= 100 or 250 <= angle <= 290 or angle == 0
+        invalid_neg_angle = -80 <= angle <= -100 or -250 <= angle <= -290 or angle == 0
         if not (invalid_neg_angle or invalid_pos_angle):
             return x, y
 
@@ -24,12 +24,13 @@ class Ball(Turtle):
         self.penup()
         self.dx = generate_random_angle()[0]
         self.dy = generate_random_angle()[1]
-        self.speed = 0
+        self.speed = 15
 
     def move_ball_start(self):
         self.dx = generate_random_angle()[0]
         self.dy = generate_random_angle()[1]
         self.goto(self.dx, self.dy)
+        self.speed = 15
 
     def move(self, window_height):
         # random_x = r.andint(0, )

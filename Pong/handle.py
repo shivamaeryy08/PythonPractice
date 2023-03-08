@@ -15,10 +15,10 @@ class Handle:
         self.generate_handle()
 
     def move(self, window_height):
-        if self.location == 'left' and self.head.ycor() > window_height / 2 - 70 and self.head.heading() == UP:
+        if self.location == 'left' and self.head.ycor() > window_height / 2 - 50 and self.head.heading() == UP:
             pass
         elif self.location == 'left' and self.head.ycor() < -1 * (
-                window_height / 2) + 70 and self.head.heading() == DOWN:
+                window_height / 2) + 75 and self.head.heading() == DOWN:
             pass
         else:
             for i in range(len(self.segment_list) - 1, 0, -1):
@@ -34,7 +34,7 @@ class Handle:
         self.head.setheading(UP)
 
     def generate_handle(self):
-        for i in range(5):
+        for i in range(7):
             prev_head = self.head
             new_head = Turtle('square')
             new_head.color('white')
@@ -55,8 +55,8 @@ class Handle:
                 segments.goto(segments.xcor() + (window_width / 2.2), segments.ycor())
 
     def move_up_and_down(self, window_height):
-        if self.head.ycor() > window_height / 2 - 70:
+        if self.head.ycor() > window_height / 2 - 50:
             self.go_down()
-        elif self.head.ycor() < (-1 * (window_height / 2)) + 70:
+        elif self.head.ycor() < (-1 * (window_height / 2)) + 75:
             self.go_up()
         self.move(window_height=window_height)
