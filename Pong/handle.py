@@ -11,21 +11,20 @@ class Handle:
         head.color('white')
         self.segment_list = [head]
         self.head = head
+        self.tail = head
         self.location = location
         self.generate_handle()
 
     def move(self, window_height):
         if self.location == 'left' and self.head.ycor() > window_height / 2 - 50 and self.head.heading() == UP:
             pass
-        elif self.location == 'left' and self.head.ycor() < -1 * (
-                window_height / 2) + 75 and self.head.heading() == DOWN:
+        elif self.location == 'left' and self.tail.ycor() < -1 * (
+                window_height / 2) + 85 and self.head.heading() == DOWN:
             pass
         else:
-            for i in range(len(self.segment_list) - 1, 0, -1):
-                cur_square = self.segment_list[i]
-                pos_mov_to = self.segment_list[i - 1].position()
-                cur_square.goto(pos_mov_to)
-            self.head.forward(DISTANCE)
+            for segment in self.segment_list:
+                segment.setheading(self.head.heading())
+                segment.forward(DISTANCE)
 
     def go_down(self):
         self.head.setheading(DOWN)
@@ -34,7 +33,7 @@ class Handle:
         self.head.setheading(UP)
 
     def generate_handle(self):
-        for i in range(7):
+        for i in range(10):
             prev_head = self.head
             new_head = Turtle('square')
             new_head.color('white')
@@ -43,6 +42,7 @@ class Handle:
             self.head = new_head
             self.segment_list.insert(0, new_head)
         self.head.setheading(UP)
+        self.tail = self.segment_list[len(self.segment_list) - 1]
 
     def set_location(self, window_width):
         if self.location == 'left':
@@ -57,6 +57,6 @@ class Handle:
     def move_up_and_down(self, window_height):
         if self.head.ycor() > window_height / 2 - 50:
             self.go_down()
-        elif self.head.ycor() < (-1 * (window_height / 2)) + 75:
+        elif self.tail.ycor() < (-1 * (window_height / 2)) + 110:
             self.go_up()
         self.move(window_height=window_height)
