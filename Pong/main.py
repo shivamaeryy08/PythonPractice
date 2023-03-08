@@ -31,7 +31,7 @@ screen.onkey(fun=left_handle.go_down, key='s')
 while game_is_on:
     right_handle.move_up_and_down(window_height=WINDOW_HEIGHT)
     left_handle.move(window_height=WINDOW_HEIGHT)
-    if ball.xcor() > WINDOW_WIDTH / 2 - 100:
+    if ball.xcor() > WINDOW_WIDTH / 2:
         ball.move_ball_start()
         score_left.update_score()
         screen.update()
@@ -39,6 +39,11 @@ while game_is_on:
         ball.move_ball_start()
         score_right.update_score()
         screen.update()
+    # if ball.distance(left_handle.head) < 5:
+    #     ball.dy *= -1
+    #     ball.generate_direction(window_height=WINDOW_HEIGHT)
+    #     ball.move()
+    # else:
     ball.move(window_height=WINDOW_HEIGHT)
     screen.update()
     time.sleep(0.05)

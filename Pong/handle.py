@@ -5,7 +5,7 @@ DISTANCE = 20
 DOWN = 270
 
 
-class Handle():
+class Handle:
     def __init__(self, location):
         head = Turtle('square')
         head.color('white')
