@@ -14,12 +14,18 @@ class Handle():
         self.location = location
         self.generate_handle()
 
-    def move(self):
-        for i in range(len(self.segment_list) - 1, 0, -1):
-            cur_square = self.segment_list[i]
-            pos_mov_to = self.segment_list[i - 1].position()
-            cur_square.goto(pos_mov_to)
-        self.head.forward(DISTANCE)
+    def move(self, window_height):
+        if self.location == 'left' and self.head.ycor() > window_height / 2 - 70 and self.head.heading() == UP:
+            pass
+        elif self.location == 'left' and self.head.ycor() < -1 * (
+                window_height / 2) + 70 and self.head.heading() == DOWN:
+            pass
+        else:
+            for i in range(len(self.segment_list) - 1, 0, -1):
+                cur_square = self.segment_list[i]
+                pos_mov_to = self.segment_list[i - 1].position()
+                cur_square.goto(pos_mov_to)
+            self.head.forward(DISTANCE)
 
     def go_down(self):
         self.head.setheading(DOWN)
@@ -53,4 +59,4 @@ class Handle():
             self.go_down()
         elif self.head.ycor() < (-1 * (window_height / 2)) + 70:
             self.go_up()
-        self.move()
+        self.move(window_height=window_height)

@@ -30,7 +30,7 @@ screen.onkey(fun=left_handle.go_down, key='s')
 
 while game_is_on:
     right_handle.move_up_and_down(window_height=WINDOW_HEIGHT)
-    left_handle.move()
+    left_handle.move(window_height=WINDOW_HEIGHT)
     if ball.xcor() > WINDOW_WIDTH / 2 - 100:
         ball.move_ball_start()
         score_left.update_score()
