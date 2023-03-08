@@ -57,6 +57,6 @@ class Handle:
     def move_up_and_down(self, window_height):
         if self.head.ycor() > window_height / 2 - 50:
             self.go_down()
-        elif self.tail.ycor() < (-1 * (window_height / 2)) + 110:
+        elif self.tail.ycor() < (-1 * (window_height / 2)) + 90:
             self.go_up()
         self.move(window_height=window_height)

@@ -31,11 +31,9 @@ game_is_on = True
 screen.onkey(fun=left_handle.go_up, key='Up')
 screen.onkey(fun=left_handle.go_down, key='Down')
 
-while game_is_on:
-    right_handle.move_up_and_down(window_height=WINDOW_HEIGHT)
-    screen.update()
-    left_handle.move(window_height=WINDOW_HEIGHT)
-    screen.update()
+
+def update_score():
+    global game_is_on
     if ball.xcor() > WINDOW_WIDTH / 2:
         ball.move_ball_start()
         screen.update()
@@ -46,16 +44,30 @@ while game_is_on:
         screen.update()
         score_right.update_score()
         screen.update()
-    if ball.xcor() < 0:
+    if score_right.score == 5:
+        game_is_on = False
+
+
+def handle_collision_ball():
+    if left_handle.head.xcor() - 10 <= ball.xcor() < 0:
         for segment in left_handle.segment_list:
-            if ball.distance(segment) < 20:
+            if ball.distance(segment) < 35:
                 ball.dx *= -1
                 break
-    if ball.xcor() > 0:
+    if 0 < ball.xcor() <= right_handle.head.xcor() + 10:
         for segment in right_handle.segment_list:
-            if ball.distance(segment) < 20:
+            if ball.distance(segment) < 35:
                 ball.dx *= -1
                 break
+
+
+while game_is_on:
+    right_handle.move_up_and_down(window_height=WINDOW_HEIGHT)
+    screen.update()
+    left_handle.move(window_height=WINDOW_HEIGHT)
+    screen.update()
+    update_score()
+    handle_collision_ball()
     ball.move(window_height=WINDOW_HEIGHT)
     screen.update()
     time.sleep(0.02)
