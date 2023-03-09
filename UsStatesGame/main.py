@@ -3,7 +3,7 @@ import pandas
 from Score import Score
 import time
 
-ALIGNMENT = "left"
+ALIGNMENT = "center"
 FONT = ('Arial', 8, 'normal')
 
 screen = turtle.Screen()
