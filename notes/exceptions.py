@@ -18,3 +18,5 @@ finally:
     print("Finished reading file")
 
 # Raising own exceptions
+
+raise KeyError("message")  # tap into known exception classes
