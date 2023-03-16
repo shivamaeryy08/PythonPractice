@@ -15,9 +15,6 @@ STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
 
 
-## STEP 1: Use https://www.alphavantage.co
-# When STOCK price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
-
 def check_stock_status():
     api_key = os.getenv('stock_password')
     today = date.today()
@@ -30,20 +27,19 @@ def check_stock_status():
     data = response.json()
     today_closing_price = float(data['Time Series (Daily)'][today]["4. close"])
     yesterday_closing_price = float(data['Time Series (Daily)'][yesterday]["4. close"])
-    pct_change = 100 * ((yesterday_closing_price - today_closing_price) / yesterday_closing_price)
-    if pct_change >= 5:
-        status_stocks = "Increase"
-        print("Get news")
-    elif pct_change <= -5:
-        status_stocks = "Decrease"
-        print("Get news")
+    pct_change_ = 100 * ((yesterday_closing_price - today_closing_price) / yesterday_closing_price)
+    if pct_change_ >= 5:
+        status_stocks_ = "Increase"
+        report_news_ = True
+    elif pct_change_ <= -5:
+        status_stocks_ = "Decrease"
+        report_news_ = True
     else:
-        status_stocks = "Minor changes"
-    return status_stocks, pct_change
+        status_stocks_ = "Minor changes"
+        report_news_ = False
+    return status_stocks_, pct_change_, report_news_
 
 
-## STEP 2: Use https://newsapi.org
-# Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME.
 def get_news():
     api_key = os.getenv('news_password')
     response = requests.get(
@@ -51,24 +47,26 @@ def get_news():
             f'=3&apiKey={api_key}')
     response.raise_for_status()
     data = response.json()
-    articles = data['articles']
-    return data
+    articles_ = data['articles']
+    return articles_
 
 
-print(check_stock_status())
-print(get_news())
+def send_message(pct_change_, articles_, report_news_, status_stocks_):
+    news_to_display = ""
+    for article in articles_:
+        news_to_display += f"Title: {article['title']}\nDescription: {article['description']}\n" \
+                           f"Published: {article['publishedAt'].split('T')[0]}\n\n\n"
+    if report_news_:
+        if status_stocks_ == 'Increase':
+            print(f'{STOCK} ⬆️ {pct_change_}%\n\n'
+                  f'{news_to_display}')
+        elif status_stocks_ == 'Decrease':
+            print(f'{STOCK} ⬇️ {pct_change_}%\n\n'
+                  f'{news_to_display}')
+    else:
+        print(f'{STOCK} 🤷‍♂️ No Major Change {pct_change_}%')
 
-## STEP 3: Use https://www.twilio.com
-# Send a seperate message with the percentage change and each article's title and description to your phone number.
 
-
-# Optional: Format the SMS message like this:
-"""
-TSLA: 🔺2%
-Headline: Were Hedge Funds Right About Piling Into Tesla Inc. (TSLA)?. 
-Brief: We at Insider Monkey have gone over 821 13F filings that hedge funds and prominent investors are required to file by the SEC The 13F filings show the funds' and investors' portfolio positions as of March 31st, near the height of the coronavirus market crash.
-or
-"TSLA: 🔻5%
-Headline: Were Hedge Funds Right About Piling Into Tesla Inc. (TSLA)?. 
-Brief: We at Insider Monkey have gone over 821 13F filings that hedge funds and prominent investors are required to file by the SEC The 13F filings show the funds' and investors' portfolio positions as of March 31st, near the height of the coronavirus market crash.
-"""
+status_stocks, pct_change, report_news = check_stock_status()
+articles = get_news()
+send_message(pct_change, articles, report_news, status_stocks)
