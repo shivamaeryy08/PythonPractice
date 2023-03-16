@@ -4,13 +4,6 @@ from datetime import timedelta
 from config import *
 import os
 
-# Get stock prices of the one we're interested in, get closing price over two days and get diff
-# Get percentage of the rise
-
-
-# News message
-
-# Twiligo message
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
 
@@ -54,8 +47,8 @@ def get_news():
 def send_message(pct_change_, articles_, report_news_, status_stocks_):
     news_to_display = ""
     for article in articles_:
-        news_to_display += f"Title: {article['title']}\nDescription: {article['description']}\n" \
-                           f"Published: {article['publishedAt'].split('T')[0]}\n\n\n"
+        news_to_display += (f"Title: {article['title']}\nDescription: {article['description']}\n"
+                            f"Published: {article['publishedAt'].split('T')[0]}\n\n\n")
     if report_news_:
         if status_stocks_ == 'Increase':
             print(f'{STOCK} ⬆️ {pct_change_}%\n\n'
